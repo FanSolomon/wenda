@@ -2,6 +2,7 @@ package com.company.wenda.controller;
 
 import com.company.wenda.aspect.LogAspect;
 import com.company.wenda.model.Question;
+import com.company.wenda.model.User;
 import com.company.wenda.model.ViewObject;
 import com.company.wenda.service.QuestionService;
 import com.company.wenda.service.UserService;
@@ -13,8 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class HomeController {
@@ -50,4 +50,5 @@ public class HomeController {
         model.addAttribute("vos", getQuestions(userId, 0, 10));
         return "index";
     }
+
 }
