@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
 import java.util.*;
 
-@Controller//入口层
+//@Controller//入口层
 public class IndexController {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(LogAspect.class);
 
