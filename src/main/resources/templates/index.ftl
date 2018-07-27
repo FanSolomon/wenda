@@ -1,4 +1,4 @@
-<#include "header.html" parse = true>
+<#include "header.ftl" parse = true>
 <div class="zg-wrap zu-main clearfix " role="main">
     <div class="zu-main-content">
         <div class="zu-main-content-inner">

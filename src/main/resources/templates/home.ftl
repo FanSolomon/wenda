@@ -18,7 +18,7 @@
     <#assign title = "nowcoder"> <#-- 创建变量 title -->
     Title: ${title}
 
-    <#include "header.html" parse = true>
+    <#include "header.ftl" parse = true>
     <#-- parse如果为true,那么被包含的文件将会当作FTL来解析，
         否则整个文件将被视为简单文本默认是true
         主要用于公共部分的引入-->

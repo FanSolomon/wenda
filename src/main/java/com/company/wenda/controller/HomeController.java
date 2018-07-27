@@ -1,6 +1,7 @@
 package com.company.wenda.controller;
 
 import com.company.wenda.aspect.LogAspect;
+import com.company.wenda.model.HostHolder;
 import com.company.wenda.model.Question;
 import com.company.wenda.model.User;
 import com.company.wenda.model.ViewObject;
@@ -25,6 +26,9 @@ public class HomeController {
 
     @Autowired
     QuestionService questionService;
+
+    @Autowired
+    HostHolder hostHolder;
 
     private List<ViewObject> getQuestions(int userId, int offset, int limit) {
         List<Question> questionList = questionService.getLatestQuestions(userId, offset, limit);

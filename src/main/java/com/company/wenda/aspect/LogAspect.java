@@ -20,11 +20,13 @@ public class LogAspect {
 
     @Before("execution(* com.company.wenda.controller.*Controller.*(..))")
     public void beforeMethod(JoinPoint joinPoint){
-        StringBuilder sb = new StringBuilder();
-        for (Object arg : joinPoint.getArgs()){
-            sb.append("args:" + arg.toString() + "|");
-        }
-        logger.info("before method" + new Date() + sb.toString());
+//        StringBuilder sb = new StringBuilder();
+//        for (Object arg : joinPoint.getArgs()){
+//            sb.append("args:" + arg.toString() + "|");
+//        }
+//        logger.info("before method" + new Date() + sb.toString());
+        //此段有报错：Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+        // [Request processing failed; nested exception is java.lang.NullPointerException] with root cause
     }
 
     @After("execution(* com.company.wenda.controller.*Controller.*(..))")
