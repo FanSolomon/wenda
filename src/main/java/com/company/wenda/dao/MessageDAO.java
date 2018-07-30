@@ -1,10 +1,7 @@
 package com.company.wenda.dao;
 
 import com.company.wenda.model.Message;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,4 +27,7 @@ public interface MessageDAO {
     @Select({"select ", INSERT_FIELDS, " ,count(id) as id from ( select * from ", TABLE_NAME, " where from_id=#{userId} or to_id=#{userId} order by id desc) tt group by conversation_id  order by created_date desc limit #{offset}, #{limit}"})
     List<Message> getConversationList(@Param("userId") int userId,
                                       @Param("offset") int offset, @Param("limit") int limit);
+
+    @Update({"update ", TABLE_NAME, " set has_read=#{hasRead} where conversation_id=#{conversationId} and to_id=#{userId}"})
+    int updateHasRead(@Param("conversationId") String conversationId, @Param("hasRead") int hasRead, @Param("userId") int userId);
 }

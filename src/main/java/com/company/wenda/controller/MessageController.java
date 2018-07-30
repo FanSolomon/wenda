@@ -61,6 +61,7 @@ public class MessageController {
         try {
             List<Message> conversationList = messageService.getConversationDetail(conversationId, 0, 10);
             List<ViewObject> messages = new ArrayList<>();
+            int localUserId = hostHolder.getUser().getId();
             for (Message msg : conversationList) {
                 ViewObject vo = new ViewObject();
                 vo.set("message", msg);
@@ -73,6 +74,8 @@ public class MessageController {
                 messages.add(vo);
             }
             model.addAttribute("messages", messages);
+
+            messageService.updateRead(conversationId, localUserId);
         } catch (Exception e) {
             logger.error("获取详情消息失败" + e.getMessage());
         }
