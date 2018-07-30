@@ -104,4 +104,8 @@ public class UserService {
         return userDAO.selectByid(id);
     }
 
+    public User selectByName(String name) {
+        return userDAO.selectByName(name);
+    }
+
 }

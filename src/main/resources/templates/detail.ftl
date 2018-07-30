@@ -100,9 +100,9 @@
                         <div class="zm-item-answer-author-info">
                             <a class="zm-item-link-avatar avatar-link" href="" target="_blank"
                                data-tip="p$t$yingxiaodao">
-                                <img src="$comment.user.headUrl"
+                                <img src="${comment.user.headUrl}"
                                      class="zm-list-avatar avatar"></a>
-                            <a class="author-link" target="_blank" href="/user/$comment.user.id">$comment.user.name</a>
+                            <a class="author-link" target="_blank" href="/user/${comment.user.id}">${comment.user.name}</a>
                             </div>
                         <div class="zm-item-vote-info" data-votecount="28" data-za-module="VoteInfo">
                                 <span class="voters text">
@@ -114,7 +114,7 @@
                          data-action="/answer/content" data-author-name="营销岛"
                          data-entry-url="/question/36301524/answer/66862039">
                         <div class="zm-editable-content clearfix">
-                            $comment.comment.content
+                            ${comment.comment.content}
                         </div>
                     </div>
                     <a class="zg-anchor-hidden ac" name="22162611-comment"></a>
@@ -142,7 +142,7 @@
             </div>
             <a name="draft"></a>
             <form action="/addComment" method="post" id="commentform">
-                <input type="hidden" name="questionId" value="$question.id"/>
+                <input type="hidden" name="questionId" value="${question.id}"/>
             <div id="zh-question-answer-form-wrap" class="zh-question-answer-form-wrap">
                 <div class="zm-editable-editor-wrap" style="">
                     <div class="zm-editable-editor-outer">
