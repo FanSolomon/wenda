@@ -1,7 +1,12 @@
 package com.company.wenda.controller;
 
+import com.company.wenda.async.EventModel;
+import com.company.wenda.async.EventProducer;
+import com.company.wenda.async.EventType;
+import com.company.wenda.model.Comment;
 import com.company.wenda.model.EntityType;
 import com.company.wenda.model.HostHolder;
+import com.company.wenda.service.CommentService;
 import com.company.wenda.service.LikeService;
 import com.company.wenda.util.WendaUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +24,25 @@ public class LikeController {
     @Autowired
     HostHolder hostHolder;
 
+    @Autowired
+    EventProducer eventProducer;
+
+    @Autowired
+    CommentService commentService;
+
     @RequestMapping(path = {"/like"}, method = {RequestMethod.POST})
     @ResponseBody
     public String like(@RequestParam("commentId") int commentId) {
         if (hostHolder.getUser() == null) {
             return WendaUtil.getJSONString(999);
         }
+
+        Comment comment = commentService.getCommentById(commentId);
+
+        eventProducer.fireEvent(new EventModel(EventType.LIKE)
+                .setActorId(hostHolder.getUser().getId()).setEntityId(commentId)
+                .setEntityType(EntityType.ENTITY_COMMENT).setEntityOwnerId(comment.getUserId())
+                .setExt("questionId", String.valueOf(comment.getEntityId())));
 
         long likeCount = likeService.like(hostHolder.getUser().getId(), EntityType.ENTITY_COMMENT, commentId);
         return WendaUtil.getJSONString(0, String.valueOf(likeCount));

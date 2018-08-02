@@ -1,5 +1,8 @@
 package com.company.wenda.controller;
 
+import com.company.wenda.async.EventModel;
+import com.company.wenda.async.EventProducer;
+import com.company.wenda.async.EventType;
 import com.company.wenda.service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.LoggerFactory;
@@ -22,6 +25,9 @@ public class LoginController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    EventProducer eventProducer;
+
     @RequestMapping(path = {"/reg/"}, method = {RequestMethod.POST})
     public String reg(Model model, @RequestParam("username") String username,
                       @RequestParam("password") String password,
@@ -37,6 +43,9 @@ public class LoginController {
                     cookie.setMaxAge(3600*24*5);    //设置生命周期
                 }
                 response.addCookie(cookie);
+
+
+
                 if (StringUtils.isNotBlank(next)) {
                     return "redirect:" + next;
                 }
@@ -74,6 +83,12 @@ public class LoginController {
                     cookie.setMaxAge(3600*24*5);
                 }
                 response.addCookie(cookie);
+
+                eventProducer.fireEvent(new EventModel(EventType.LOGIN)
+                        .setExt("username", username).setExt("email", "1041826928@qq.com")
+                        );
+                //.setActorId(Integer.valueOf(map.get("userId")))
+
                 if (StringUtils.isNotBlank(next)) {
                     return "redirect:" + next;
                 }
